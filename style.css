@@ -1,5 +1,3 @@
-/* === FONTS & RESET === */
-
 * {
     margin: 0;
     padding: 0;
@@ -9,13 +7,9 @@
 body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(135deg, #ffe6f2 0%, #ffb3e6 100%);
-    color: #333;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
 }
-
-
-/* === HEADER === */
 
 header {
     padding: 2rem 0;
@@ -28,8 +22,19 @@ header h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+#spotify-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 1.5rem auto;
+}
 
-/* === SWIPE CONTAINER === */
+#spotify-player {
+    width: 100%;
+    height: 80px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: none;
+}
 
 #swipe-container {
     position: relative;
@@ -47,35 +52,101 @@ header h1 {
 }
 
 #swipe-image {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease-out;
-    border-radius: 8px;
+    transition: opacity .5s ease, transform .3s ease-out;
+    position: relative;
+    z-index: 1;
 }
 
+.hidden {
+    display: none;
+}
 
-/* === SETAS === */
+#heart-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('assets/imagens/flores.png') no-repeat center/cover;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2rem;
+    opacity: 0;
+    transition: opacity .5s ease;
+    z-index: 2;
+    border-radius: 12px;
+}
+
+#heart-card.visible {
+    opacity: 1;
+}
+
+.heart-content {
+    position: relative;
+    z-index: 3;
+    width: 88%;
+    max-width: 360px;
+    padding: 1.2rem 1rem;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    font-family: 'Dancing Script', cursive;
+    color: #222;
+    line-height: 1.6;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.heart-content p {
+    margin-bottom: 0.8rem;
+}
+
+.heart-content p:first-of-type {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.heart-content em {
+    display: block;
+    font-style: normal;
+    margin-bottom: 0.5rem;
+}
+
+.heart-content strong {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+}
 
 .arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     border: none;
-    font-size: 2rem;
-    color: #ff4da6;
-    padding: 0.5rem;
+    font-size: 2.2rem;
+    color: #e60073;
+    padding: 0.7rem;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s;
-    user-select: none;
-    z-index: 10;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: background .3s, opacity .3s;
+    z-index: 3;
 }
 
 .arrow:hover {
     background: rgba(255, 255, 255, 1);
+}
+
+.arrow.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .arrow.left {
@@ -86,22 +157,41 @@ header h1 {
     right: 1rem;
 }
 
-
-/* botões maiores no celular */
-
-@media (max-width: 600px) {
+@media(max-width:600px) {
     #swipe-container {
-        max-width: 90%;
         height: 60vh;
     }
     .arrow {
-        font-size: 2.5rem;
-        padding: 0.8rem;
+        font-size: 2.7rem;
+        padding: 1rem;
     }
 }
 
+.big-heart {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 90px;
+    opacity: .9;
+    animation: popHeart .6s ease-out forwards;
+    z-index: 4;
+}
 
-/* === CORAÇÕES === */
+@keyframes popHeart {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
 
 #heart-container {
     position: fixed;
@@ -115,9 +205,9 @@ header h1 {
 
 .heart {
     position: absolute;
-    font-size: 24px;
-    opacity: 0.9;
-    animation: floatUp 2s ease-out forwards, pulse 0.8s ease-in-out infinite;
+    font-size: 28px;
+    opacity: .9;
+    animation: floatUp 2s ease-out forwards, pulse .8s ease-in-out infinite;
 }
 
 @keyframes floatUp {
@@ -126,7 +216,7 @@ header h1 {
         opacity: 1;
     }
     100% {
-        transform: translateY(-120px) scale(1.3);
+        transform: translateY(-150px) scale(1.5);
         opacity: 0;
     }
 }
@@ -137,6 +227,6 @@ header h1 {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.3);
+        transform: scale(1.4);
     }
 }
