@@ -6,11 +6,16 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(135deg, #ffe6f2 0%, #ffb3e6 100%);
     text-align: center;
-    overflow-x: hidden;
 }
 
 
@@ -28,7 +33,7 @@ header h1 {
 }
 
 
-/* === SPOTIFY === */
+/* === SPOTIFY PLAYER === */
 
 #spotify-container {
     width: 100%;
@@ -45,7 +50,7 @@ header h1 {
 }
 
 
-/* === SWIPE CONTAINER === */
+/* === GALERIA SWIPE === */
 
 #swipe-container {
     position: relative;
@@ -62,20 +67,17 @@ header h1 {
     justify-content: center;
 }
 
-
-/* === SWIPE IMAGE === */
-
 #swipe-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: opacity .5s ease, transform .3s ease-out;
-    position: relative;
     z-index: 1;
+    border-radius: 12px;
 }
 
 
-/* === FINAL CARD (FLORES DE FUNDO) === */
+/* === CARTÃO FINAL === */
 
 .hidden {
     display: none;
@@ -110,7 +112,7 @@ header h1 {
     z-index: 3;
     width: 85%;
     max-width: 360px;
-    padding: 1.2rem 1rem;
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(6px);
     border-radius: 12px;
@@ -159,17 +161,12 @@ header h1 {
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-    transition: background .3s, opacity .3s;
+    transition: background .3s;
     z-index: 3;
 }
 
 .arrow:hover {
     background: rgba(255, 255, 255, 1);
-}
-
-.arrow.hidden {
-    opacity: 0;
-    pointer-events: none;
 }
 
 .arrow.left {
@@ -181,7 +178,7 @@ header h1 {
 }
 
 
-/* === ANIMAÇÃO CORAÇÃO GRANDE === */
+/* === CORAÇÃO “POP” === */
 
 .big-heart {
     position: absolute;
@@ -210,7 +207,7 @@ header h1 {
 }
 
 
-/* === LITTLE HEARTS “PIPOCANDO” === */
+/* === PEQUENOS CORAÇÕES === */
 
 #heart-container {
     position: fixed;
@@ -251,33 +248,42 @@ header h1 {
 }
 
 
-/* === MEDIA QUERIES: CELULAR === */
+/* === MEDIA QUERIES PARA CELULAR === */
 
 @media (max-width: 600px) {
     header h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+    }
+    #spotify-container {
+        width: 90%;
+        /* sobra margem lateral */
     }
     #spotify-player {
         height: 60px;
     }
     #swipe-container {
+        width: 90%;
+        /* sobra proximidades */
         height: 50vh;
     }
+    #swipe-image {
+        border-radius: 10px;
+    }
     .arrow {
-        font-size: 2rem;
-        padding: 0.6rem;
+        font-size: 1.8rem;
+        padding: 0.5rem;
     }
     .heart-content {
         width: 90%;
-        padding: 1rem;
-        font-size: 1.1rem;
-        line-height: 1.5;
+        font-size: 1rem;
+        line-height: 1.4;
+        padding: 0.8rem;
     }
 }
 
 @media (max-width: 400px) {
     header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     #spotify-player {
         height: 50px;
@@ -286,11 +292,11 @@ header h1 {
         height: 45vh;
     }
     .arrow {
-        font-size: 1.8rem;
-        padding: 0.5rem;
+        font-size: 1.6rem;
+        padding: 0.4rem;
     }
     .heart-content {
-        font-size: 1rem;
-        line-height: 1.4;
+        font-size: 0.95rem;
+        line-height: 1.3;
     }
 }
