@@ -1,17 +1,28 @@
-/* === RESET & FONTS === */
+/* === BLOQUEIO DE SCROLL E RESET === */
 
-* {
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    /* bloqueia todo scroll da página */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* === FONTES & BACKGROUND === */
 
 body {
     padding: 0 16px;
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(135deg, #ffe6f2 0%, #ffb3e6 100%);
     text-align: center;
-    overflow-x: hidden;
 }
 
 
@@ -46,14 +57,14 @@ header h1 {
 }
 
 
-/* === SWIPE CONTAINER === */
+/* === GALERIA SWIPE === */
 
 #swipe-container {
     position: relative;
     width: 100%;
     max-width: 400px;
     height: 55vh;
-    /* sem scroll */
+    /* ajustado para caber sem scroll */
     margin: 2rem auto;
     background: #fff;
     border-radius: 12px;
@@ -64,21 +75,18 @@ header h1 {
     justify-content: center;
 }
 
-
-/* === SWIPE IMAGE === */
-
 #swipe-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity .5s ease, transform .3s ease-out;
+    transition: opacity 0.5s ease, transform 0.3s ease-out;
     border-radius: 12px;
     position: relative;
     z-index: 1;
 }
 
 
-/* === FINAL CARD BACKGROUND === */
+/* === CARTÃO FINAL === */
 
 .hidden {
     display: none;
@@ -96,7 +104,7 @@ header h1 {
     justify-content: center;
     padding-top: 2rem;
     opacity: 0;
-    transition: opacity .5s ease;
+    transition: opacity 0.5s ease;
     border-radius: 12px;
     z-index: 2;
 }
@@ -106,7 +114,7 @@ header h1 {
 }
 
 
-/* === TEXT BOX ON CARD === */
+/* === CAIXA DE TEXTO === */
 
 .heart-content {
     position: relative;
@@ -121,16 +129,13 @@ header h1 {
     font-family: 'Dancing Script', cursive;
     color: #222;
     line-height: 1.4;
-    /* mais compacto */
     font-size: 1.1rem;
-    /* ligeiramente menor */
     text-align: center;
     margin-top: 1rem;
 }
 
 .heart-content p {
     margin-bottom: 0.6rem;
-    /* menos espaçamento */
 }
 
 .heart-content p:first-of-type {
@@ -152,7 +157,7 @@ header h1 {
 }
 
 
-/* === NAVIGATION ARROWS (ajustadas) === */
+/* === SETAS DE NAVEGAÇÃO === */
 
 .arrow {
     position: absolute;
@@ -161,14 +166,12 @@ header h1 {
     background: rgba(255, 255, 255, 0.9);
     border: none;
     font-size: 1.4rem;
-    /* menor */
     color: #e60073;
     padding: 0.4rem;
-    /* menor */
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-    transition: background .3s, opacity .3s;
+    transition: background 0.3s, opacity 0.3s;
     z-index: 3;
 }
 
@@ -182,15 +185,15 @@ header h1 {
 }
 
 .arrow.left {
-    left: 0.5rem;
+    left: 1rem;
 }
 
 .arrow.right {
-    right: 0.5rem;
+    right: 1rem;
 }
 
 
-/* === MOBILE ADJUSTMENTS === */
+/* === MOBILE AJUSTES === */
 
 @media (max-width: 600px) {
     #swipe-container {
@@ -208,7 +211,7 @@ header h1 {
 }
 
 
-/* === BIG HEART ANIMATION === */
+/* === ANIMAÇÕES DE CORAÇÃO === */
 
 .big-heart {
     position: absolute;
@@ -235,9 +238,6 @@ header h1 {
         opacity: 0;
     }
 }
-
-
-/* === LITTLE HEARTS “POPPING” === */
 
 #heart-container {
     position: fixed;
