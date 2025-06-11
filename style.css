@@ -7,7 +7,6 @@
 }
 
 body {
-    /* margem lateral fixa de 16px para todo o conteúdo */
     padding: 0 16px;
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(135deg, #ffe6f2 0%, #ffb3e6 100%);
@@ -33,11 +32,9 @@ header h1 {
 /* === SPOTIFY PLAYER === */
 
 #spotify-container {
-    /* ocupa 100% do espaço disponível (já descontados os 16px das laterais) */
     width: 100%;
     max-width: 400px;
     margin: 1.5rem auto;
-    /* centralizado */
 }
 
 #spotify-player {
@@ -52,16 +49,16 @@ header h1 {
 /* === SWIPE CONTAINER === */
 
 #swipe-container {
+    position: relative;
     width: 100%;
     max-width: 400px;
-    height: 70vh;
+    height: 55vh;
+    /* ajustado para evitar scroll */
     margin: 2rem auto;
-    /* centralizado, com 16px de margem nas laterais pelo body */
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -181,7 +178,6 @@ header h1 {
 
 .arrow.left {
     left: 1rem;
-    /* 1rem dentro do container */
 }
 
 .arrow.right {
@@ -190,7 +186,8 @@ header h1 {
 
 @media (max-width: 600px) {
     #swipe-container {
-        height: 60vh;
+        height: 50vh;
+        /* ajustado para mobile */
     }
     .arrow {
         font-size: 3rem;
