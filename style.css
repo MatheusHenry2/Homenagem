@@ -117,12 +117,11 @@ header h1 {
 }
 
 
-/* === SLIDER & SPOTIFY === */
+/* === SPOTIFY === */
 
 #spotify-container {
     position: relative;
     z-index: 10;
-    /* garante o iframe acima de tudo */
     width: 100%;
     max-width: 400px;
     margin: 1rem auto;
@@ -130,13 +129,12 @@ header h1 {
 
 #spotify-player {
     pointer-events: auto;
-    /* garante clique no iframe */
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 
-/* CARROSSEL */
+/* === CARROSSEL === */
 
 #swipe-container {
     position: relative;
@@ -190,7 +188,7 @@ header h1 {
 }
 
 
-/* === CARTÃO FINAL === */
+/* === CARTÃO FINAL (agora dentro de #swipe-container) === */
 
 #heart-card {
     position: absolute;
@@ -198,7 +196,7 @@ header h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('assets/imagens/flores.png')no-repeat center/cover;
+    background: url('assets/imagens/flores.png') no-repeat center/cover;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -229,28 +227,6 @@ header h1 {
     font-size: 1.1rem;
     text-align: center;
     margin-top: 1rem;
-}
-
-.heart-content p {
-    margin-bottom: .6rem
-}
-
-.heart-content p:first-of-type {
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.heart-content em {
-    display: block;
-    font-style: normal;
-    margin-bottom: .5rem
-}
-
-.heart-content strong {
-    display: block;
-    margin-top: 1rem;
-    font-size: 1.25rem
 }
 
 

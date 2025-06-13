@@ -9,7 +9,7 @@ const quizData = [
 ];
 let qi = 0;
 
-// referências do DOM
+// referências
 const quizSection = document.getElementById('quiz-section');
 const questionEl = document.getElementById('quiz-question');
 const optsCont = document.getElementById('quiz-options');
@@ -20,7 +20,6 @@ const imgEl = document.getElementById('swipe-image');
 const btnNext = document.getElementById('btn-next');
 const btnPrev = document.getElementById('btn-prev');
 const heartCard = document.getElementById('heart-card');
-const hearts = document.getElementById('heart-container');
 
 const images = [
     'assets/imagens/foto1.jpeg',
@@ -48,7 +47,7 @@ function loadQuestion() {
 }
 loadQuestion();
 
-// trata resposta
+// seleciona opção
 function selectOption(isCorrect) {
     if (!isCorrect) {
         alert('❌ Ops! Resposta errada. Tente de novo com carinho! ❌');
@@ -60,7 +59,7 @@ function selectOption(isCorrect) {
         if (qi < quizData.length) {
             loadQuestion();
         } else {
-            // fim do quiz: esconde o quiz e mostra o slider
+            // fim do quiz
             quizSection.style.display = 'none';
             sliderSection.style.display = 'block';
             currentIndex = 0;
@@ -69,7 +68,7 @@ function selectOption(isCorrect) {
     }, 600);
 }
 
-// atualiza imagem
+// atualiza foto
 function updateImage(dir = 0) {
     if (dir) {
         imgEl.style.transform = `translateX(${dir*80}px) rotate(${dir*5}deg)`;
@@ -90,7 +89,7 @@ function showHeartCard() {
     }, 500);
 }
 
-// animação de coração grande
+// coração grande
 function animateBigHeart() {
     const h = document.createElement('div');
     h.className = 'big-heart';
@@ -99,7 +98,7 @@ function animateBigHeart() {
     h.addEventListener('animationend', () => h.remove());
 }
 
-// pequenos corações pipocando
+// spawn corações
 function spawnHeartsAt(x, y, count = 5) {
     for (let i = 0; i < count; i++) {
         const h = document.createElement('div');
@@ -112,16 +111,14 @@ function spawnHeartsAt(x, y, count = 5) {
     }
 }
 
-// navegação
+// next/prev
 btnNext.onclick = e => {
     if (currentIndex < images.length - 1) {
         currentIndex++;
         updateImage(+1);
         animateBigHeart();
         spawnHeartsAt(e.clientX, e.clientY, 6);
-    } else {
-        showHeartCard();
-    }
+    } else showHeartCard();
 };
 btnPrev.onclick = e => {
     if (!heartCard.classList.contains('hidden')) {
@@ -143,10 +140,9 @@ btnPrev.onclick = e => {
 // swipe mobile
 let startX = 0,
     threshold = 50;
-document.getElementById('swipe-container')
-    .addEventListener('touchstart', e => startX = e.changedTouches[0].clientX);
-document.getElementById('swipe-container')
-    .addEventListener('touchend', e => {
-        const diff = e.changedTouches[0].clientX - startX;
-        if (Math.abs(diff) > threshold)(diff < 0 ? btnNext : btnPrev).click();
-    });
+const swipeCt = document.getElementById('swipe-container');
+swipeCt.addEventListener('touchstart', e => startX = e.changedTouches[0].clientX);
+swipeCt.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > threshold)(diff < 0 ? btnNext : btnPrev).click();
+});
