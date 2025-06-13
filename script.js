@@ -60,7 +60,7 @@ function selectOption(isCorrect) {
         if (qi < quizData.length) {
             loadQuestion();
         } else {
-            // Fim do quiz: esconde o quiz e mostra o slider
+            // fim do quiz: esconde o quiz e mostra o slider
             quizSection.style.display = 'none';
             sliderSection.style.display = 'block';
             currentIndex = 0;
