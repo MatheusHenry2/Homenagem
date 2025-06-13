@@ -3,11 +3,9 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feliz Dia dos Namorados 💕</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;500&family=Dancing+Script&display=swap" rel="stylesheet" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Nosso Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display&family=Roboto:wght@400;500&family=Dancing+Script&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -16,33 +14,49 @@
         <h1>Nosso Amor</h1>
     </header>
 
-    <div id="spotify-container">
-        <iframe id="spotify-player" src="https://open.spotify.com/embed/track/0tgVpDi06FyKpA1z0VMD4v" frameborder="0" allow="encrypted-media"></iframe>
-    </div>
-
-
-    <div id="swipe-container">
-        <button class="arrow left" id="btn-prev">&#10094;</button>
-        <img id="swipe-image" src="assets/imagens/foto1.jpeg" alt="Foto atual" />
-        <div id="heart-card" class="hidden">
-            <div class="heart-content">
-                <p><em>Oi amor, mais um Dia dos Namorados para a gente!</em></p>
-                <p>
-                    Fiz isso aqui para você relembrar todos os nossos momentos juntos, já são mais de 3 anos de pura alegria. O tempo passou tão rápido, né?
-                </p>
-                <p>
-                    Você mudou minha vida completamente: me ensinou a amar sem medo, a rir das pequenas bobagens e a valorizar cada segundo ao seu lado.
-                </p>
-                <p>
-                    Prometo continuar cultivando nosso carinho, apoio e aventuras, construindo nososs sonhos juntos, por todos os dias das nossas vidas.
-                </p>
-                <p><strong>Te amo hoje, amanhã e sempre! ❤️</strong></p>
+    <main id="content">
+        <!-- QUIZ -->
+        <section id="quiz-section" class="screen">
+            <h2>Quiz: Por que eu te amo?</h2>
+            <div id="quiz-container">
+                <p id="quiz-question">Carregando questão…</p>
+                <div id="quiz-options"></div>
+                <p id="quiz-progress">Pergunta 1 de 6</p>
             </div>
-        </div>
+        </section>
 
-        <button class="arrow right" id="btn-next">&#10095;</button>
-    </div>
-    <div id="heart-container"></div>
+        <!-- SLIDER & SPOTIFY (inicia invisível) -->
+        <section id="slider-section" class="screen" style="display: none;">
+            <div id="spotify-container">
+                <iframe id="spotify-player" src="https://open.spotify.com/embed/track/0tgVpDi06FyKpA1z0VMD4v" frameborder="0" allow="encrypted-media">
+        </iframe>
+            </div>
+
+            <div id="swipe-container">
+                <button class="arrow left" id="btn-prev">&#10094;</button>
+                <img id="swipe-image" src="assets/imagens/foto1.jpeg" alt="Foto atual" />
+                <button class="arrow right" id="btn-next">&#10095;</button>
+            </div>
+
+            <div id="heart-card" class="hidden">
+                <div class="heart-content">
+                    <p><em>Oi amor, mais um Dia dos Namorados para a gente!</em></p>
+                    <p>
+                        Fiz isso aqui para você relembrar todos os nossos momentos juntos, já são mais de 3 anos de pura alegria. O tempo passou tão rápido, né?
+                    </p>
+                    <p>
+                        Você mudou minha vida completamente: me ensinou a amar sem medo, a rir das pequenas bobagens e a valorizar cada segundo ao seu lado.
+                    </p>
+                    <p>
+                        Prometo continuar cultivando nosso carinho, apoio e aventuras, construindo sonhos mão na mão, por todos os dias das nossas vidas.
+                    </p>
+                    <p><strong>Te amo hoje, amanhã e sempre! ❤️</strong></p>
+                </div>
+            </div>
+
+            <div id="heart-container"></div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>

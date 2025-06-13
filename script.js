@@ -1,3 +1,27 @@
+// --- Quiz Data ---
+const quizData = [
+    { q: 'Onde a gente se viu pela primeira vez?', options: ['No cinema', 'Na praça', 'No bar no centro de Limeira', 'No shopping'], correct: 2 },
+    { q: 'Onde a gente se beijou pela primeira vez?', options: ['No parque', 'No restaurante', 'Em seu carro', 'Na praia'], correct: 2 },
+    { q: 'Onde eu falei "eu te amo" pela primeira vez?', options: ['No bar do centro', 'No Dom Pedro', 'Em casa', 'Na escola'], correct: 1 },
+    { q: 'Qual a coisa que eu mais gosto em você?', options: ['Seu senso de humor', 'Seu estilo', 'Sua inteligência', 'Seu carinho'], correct: 3 },
+    { q: 'Qual foi o primeiro filme que assistimos juntos?', options: ['Titanic', 'Batman', 'A Era do Gelo', 'Matrix'], correct: 1 },
+    { q: 'Que hábito seu me faz sorrir todo dia?', options: ['Quando você diz bom-dia', 'Quando você me faz cafuné', 'Quando você cozinha para mim', 'Quando você sorri pra mim'], correct: 1 }
+];
+let qi = 0;
+
+// referências do DOM
+const quizSection = document.getElementById('quiz-section');
+const questionEl = document.getElementById('quiz-question');
+const optsCont = document.getElementById('quiz-options');
+const progEl = document.getElementById('quiz-progress');
+
+const sliderSection = document.getElementById('slider-section');
+const imgEl = document.getElementById('swipe-image');
+const btnNext = document.getElementById('btn-next');
+const btnPrev = document.getElementById('btn-prev');
+const heartCard = document.getElementById('heart-card');
+const hearts = document.getElementById('heart-container');
+
 const images = [
     'assets/imagens/foto1.jpeg',
     'assets/imagens/foto2.jpeg',
@@ -7,17 +31,47 @@ const images = [
     'assets/imagens/foto6.jpeg'
 ];
 let currentIndex = 0;
-let hasSeenCard = false;
 
-const imgEl = document.getElementById('swipe-image');
-const btnNext = document.getElementById('btn-next');
-const btnPrev = document.getElementById('btn-prev');
-const swipeCt = document.getElementById('swipe-container');
-const card = document.getElementById('heart-card');
-const hearts = document.getElementById('heart-container');
+// carrega pergunta
+function loadQuestion() {
+    const d = quizData[qi];
+    questionEl.innerText = d.q;
+    optsCont.innerHTML = '';
+    d.options.forEach((opt, i) => {
+        const b = document.createElement('button');
+        b.className = 'quiz-btn';
+        b.innerText = opt;
+        b.onclick = () => selectOption(i === d.correct);
+        optsCont.appendChild(b);
+    });
+    progEl.innerText = `Pergunta ${qi+1} de ${quizData.length}`;
+}
+loadQuestion();
 
+// trata resposta
+function selectOption(isCorrect) {
+    if (!isCorrect) {
+        alert('❌ Ops! Resposta errada. Tente de novo com carinho! ❌');
+        return;
+    }
+    animateBigHeart();
+    setTimeout(() => {
+        qi++;
+        if (qi < quizData.length) {
+            loadQuestion();
+        } else {
+            // Fim do quiz: esconde o quiz e mostra o slider
+            quizSection.style.display = 'none';
+            sliderSection.style.display = 'block';
+            currentIndex = 0;
+            updateImage(0);
+        }
+    }, 600);
+}
+
+// atualiza imagem
 function updateImage(dir = 0) {
-    if (dir !== 0) {
+    if (dir) {
         imgEl.style.transform = `translateX(${dir*80}px) rotate(${dir*5}deg)`;
         setTimeout(() => imgEl.style.transform = '', 300);
     }
@@ -25,25 +79,27 @@ function updateImage(dir = 0) {
     imgEl.style.opacity = 1;
 }
 
+// exibe cartão final
 function showHeartCard() {
-    hasSeenCard = true;
     imgEl.style.opacity = 0;
     setTimeout(() => {
         imgEl.classList.add('hidden');
-        card.classList.remove('hidden');
-        card.classList.add('visible');
+        heartCard.classList.remove('hidden');
+        heartCard.classList.add('visible');
         spawnHeartsAt(window.innerWidth / 2, window.innerHeight / 2, 15);
     }, 500);
 }
 
+// animação de coração grande
 function animateBigHeart() {
     const h = document.createElement('div');
     h.className = 'big-heart';
     h.innerText = '❤️';
-    swipeCt.appendChild(h);
+    document.body.appendChild(h);
     h.addEventListener('animationend', () => h.remove());
 }
 
+// pequenos corações pipocando
 function spawnHeartsAt(x, y, count = 5) {
     for (let i = 0; i < count; i++) {
         const h = document.createElement('div');
@@ -51,21 +107,14 @@ function spawnHeartsAt(x, y, count = 5) {
         h.innerText = '❤️';
         h.style.left = x + (Math.random() * 40 - 20) + 'px';
         h.style.top = y + (Math.random() * 40 - 20) + 'px';
-        hearts.appendChild(h);
+        document.body.appendChild(h);
         h.addEventListener('animationend', () => h.remove());
     }
 }
 
-btnNext.addEventListener('click', e => {
-    if (!card.classList.contains('hidden')) {
-        card.classList.remove('visible');
-        setTimeout(() => {
-            card.classList.add('hidden');
-            currentIndex = 0;
-            imgEl.classList.remove('hidden');
-            updateImage(0);
-        }, 500);
-    } else if (currentIndex < images.length - 1) {
+// navegação
+btnNext.onclick = e => {
+    if (currentIndex < images.length - 1) {
         currentIndex++;
         updateImage(+1);
         animateBigHeart();
@@ -73,13 +122,12 @@ btnNext.addEventListener('click', e => {
     } else {
         showHeartCard();
     }
-});
-
-btnPrev.addEventListener('click', e => {
-    if (!card.classList.contains('hidden')) {
-        card.classList.remove('visible');
+};
+btnPrev.onclick = e => {
+    if (!heartCard.classList.contains('hidden')) {
+        heartCard.classList.remove('visible');
         setTimeout(() => {
-            card.classList.add('hidden');
+            heartCard.classList.add('hidden');
             imgEl.classList.remove('hidden');
             currentIndex = images.length - 1;
             updateImage(0);
@@ -89,22 +137,16 @@ btnPrev.addEventListener('click', e => {
         updateImage(-1);
         animateBigHeart();
         spawnHeartsAt(e.clientX, e.clientY, 6);
-    } else if (currentIndex === 0 && hasSeenCard) {
-        showHeartCard();
     }
+};
 
-});
-
-
+// swipe mobile
 let startX = 0,
     threshold = 50;
-swipeCt.addEventListener('touchstart', e => {
-    startX = e.changedTouches[0].clientX;
-});
-swipeCt.addEventListener('touchend', e => {
-    const diff = e.changedTouches[0].clientX - startX;
-    if (Math.abs(diff) > threshold) {
-        if (diff < 0) btnNext.click();
-        else if (diff > 0) btnPrev.click();
-    }
-});
+document.getElementById('swipe-container')
+    .addEventListener('touchstart', e => startX = e.changedTouches[0].clientX);
+document.getElementById('swipe-container')
+    .addEventListener('touchend', e => {
+        const diff = e.changedTouches[0].clientX - startX;
+        if (Math.abs(diff) > threshold)(diff < 0 ? btnNext : btnPrev).click();
+    });
